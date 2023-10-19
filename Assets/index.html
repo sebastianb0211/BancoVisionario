@@ -6,50 +6,77 @@
     <title>Banco Visionario</title>
     <link rel="stylesheet" href="./css/Styles.css">
     <link rel="stylesheet" href="./css/inicioSesion.css">
+    <link rel="stylesheet" href="./css/botones.css">
+    <link rel="stylesheet" href="./css/carga.css">
+    <link rel="stylesheet" href="./css/pantallaPrincipal.css">
 </head>
 <body>
 
-    <header>
+    <header id="encabezado">
 
         
-            <a href=""><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+            <a href="#"><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                 <lord-icon
                     src="https://cdn.lordicon.com/etqbfrgp.json"
                     trigger="hover"
                     colors="outline:#131432,primary:#92140c,secondary:#f24c00,tertiary:#b26836,quaternary:#ebe6ef"
                     style="width:100px;height:100px">
                 </lord-icon></a>
-                <p>Inicio</p>
-                <a href=""><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+               <h3>inicio</h3>
+                <a href="#"><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                     <lord-icon
                         src="https://cdn.lordicon.com/pqxdilfs.json"
                         trigger="hover"
                         colors="outline:#131432,primary:#606874,secondary:#08a88a,tertiary:#ebe6ef"
                         style="width:100px;height:100px">
                     </lord-icon></a>
-                    <p>Ver Historial</p>
-                    <a href=""><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                    <h3>Ver historial</h3>
+                    
+                    <a href="#"><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                         <lord-icon
                             src="https://cdn.lordicon.com/alzqexpi.json"
                             trigger="hover"
                             colors="primary:#121331,secondary:#646e78,tertiary:#ffc738,quaternary:#f9c9c0,quinary:#ebe6ef"
                             style="width:100px;height:100px">
                         </lord-icon></a>
-                        <p>Editar ingreso</p>
-                        <a href=""><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                        <h3>Editar</h3>
+                       
+                        
+                        <a id="Sesion" href="#"><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                             <lord-icon
                                 src="https://cdn.lordicon.com/vusrdugn.json"
                                 trigger="hover"
                                 colors="primary:#121331,secondary:#b26836,tertiary:#4bb3fd,quaternary:#f9c9c0,quinary:#ebe6ef"
                                 style="width:100px;height:100px">
                             </lord-icon></a>
-                            <p>Perfil </p>
+                            <h3>Perfil</h3>
+                            
     </header>
+    <div class="card" id="cartaSalirSesion">
+        <div class="card-border-top">
+        </div>
+        <div class="img">
+            <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+        <lord-icon
+        src="https://cdn.lordicon.com/mebvgwrs.json"
+        trigger="loop"
+        delay="1000"
+        style="width:50px;height:50px">
+        </lord-icon>
+        </div>
+        <span>Sebastian</span>
+        <p class="job">Ingeniero de software</p>
+        <div class="botonSalir"> <button id="salirSesion"> Salir
+        </button>
+        <button id="cancelarSesion"> Cancelar
+        </button></div>
+       
+      </div>
     <div class="contenedor-titulo">
         <h1>Banco Visionario</h1> <img class="logo-banco" src="./img/logo-banco-visionario.png" alt="">
     </div>
     <main class="contenedor-inicio-sesion">
-        <div class="inicio-sesion">
+        <div id="inicio-sesion1" class="inicio-sesion">
             <div class="carta-volteada">
                 <label class="vuelta">
                    <input type="checkbox" class="interruptor">
@@ -59,30 +86,185 @@
                       <div class="voltear-carta-frente">
                          <div class="titulo">Iniciar Sesion</div>
                          <form class="voltear-formulario" action="">
-                            <input class="voltear-input" name="email" placeholder="Email" type="email">
-                            <input class="voltear-input" name="Contraseña" placeholder="Contraseña" type="password">
-                            <button class="voltear-boton">Empezar</button>
+                            <input class="voltear-input" name="email" placeholder="Email" type="email" required id="email">
+                            <label id="errorEmail" for=""></label>
+                            <input class="voltear-input" name="Contraseña" placeholder="Contraseña" type="password" required id="contraseña">
+                            <button onclick="empezar()" class="voltear-boton" type="submit">Empezar</button>
                          </form>
                       </div>
                       <div class="voltear-carta-trasera">
                          <div class="titulo">Registrarse</div>
                          <form class="voltear-formulario" action="">
-                            <input class="voltear-input" placeholder="Nombre" type="name">
-                            <input class="voltear-input" name="email" placeholder="Email" type="email">
-                            <input class="voltear-input" name="Contraseña" placeholder="Contraseña" type="password">
-                            <input class="voltear-input" name="saldo" placeholder="Ingresar Saldo" type="text">
+                            <input class="voltear-input" placeholder="Nombre" type="name" required>
+                            <input class="voltear-input" name="email" placeholder="Email" type="email" required>
+                            <input class="voltear-input" name="Contraseña" placeholder="Contraseña" type="password" required>
+                            <input class="voltear-input" name="saldo" placeholder="Ingresar Saldo" type="text" required>
 
-                            <button class="voltear-boton">Agregar</button>
+                            <button class="voltear-boton" type="submit">Agregar</button>
                          </form>
                       </div>
                    </div>
                 </label>
             </div>   
        </div>
+    <div id="contenedor-total1" class="contenedor-total">
+     <div class="contenedor-izquierdo" id="contenedor-izquierdoUno"> 
+     <button id="consultarSaldo" class="boton-banco1">Consulta Saldo <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+        <lord-icon
+            src="https://cdn.lordicon.com/osbjlbsb.json"
+            trigger="loop"
+            colors="outline:#121331,secondary:#b26836,secondary2:#4bb3fd,quaternary:#ebe6ef"
+            style="width:50px;height:50px;position: relative;top: 2px;">
+        </lord-icon></button> 
+     <button id="retirarDinero" class="boton-banco2">Retirar Dinero <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+        <lord-icon
+            src="https://cdn.lordicon.com/sxobuwft.json"
+            trigger="loop"
+            colors="outline:#30c9e8,primary:#e83a30,secondary:#ebe6ef"
+            style="width:50px;height:50px ;position: relative;top: 2px; ">
+        </lord-icon></button>
+    </div> 
+    
+    
+    <div class="contenedor-principal" >
+
+        <div class="page" id="carga">
+            <div id="container">
+                <div id="ring"></div>
+                <div id="ring"></div>
+                <div id="ring"></div>
+                <div id="ring"></div>
+                <div id="h3">Cargando....</div>
+            </div>
+    </div>
        
+        
+        <div class="diseño" id="diseño">
+            <div class="loader" id="cargaPanel">
+                <span id="nombreCarga"></span>
+            </div>
+           
+            <div class="consultarSaldo" id="consultarSaldoPanel">
+                <img style="height: 50px; width: 50px;" src="./img/logo-banco-visionario.png" alt="">
+                <h1 class="saldo">Tu saldo</h1>
+                <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/mebvgwrs.json"
+                        trigger="loop"
+                        delay="1000"
+                        style="width:50px;height:50px;position:absolute;top:153px;left: 100px;">
+                    </lord-icon>
+                <h4> Nombre: Sebastian </h4>
+                <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/lxizbtuq.json"
+                            trigger="loop"
+                            delay="1000"
+                            style="width:50px;height:50px;position:absolute;top:250px;left: 100px;">
+                        </lord-icon>
+                    <h4> Saldo: 2000000</h4>
+                        <button id="cancelarBotonSaldo" class="cancelar1" type="button"> Salir</button>
+            </div>
+
+            <div class="retirarDinero" id="retirarDineroPanel">
+                <img style="height: 50px; width: 50px;" src="./img/logo-banco-visionario.png" alt="">
+                <h1 class="saldo">Retirar Dinero</h1>
+                <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/mebvgwrs.json"
+                        trigger="loop"
+                        delay="1000"
+                        style="width:50px;height:50px;position:absolute;bottom:75px;right:760px;">
+                    </lord-icon>
+                <h4>Nombre:sebastian</h4>
+                <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+                <lord-icon
+                    src="https://cdn.lordicon.com/osperlqv.json"
+                    trigger="loop"
+                    delay="1000"
+                    style="width:50px;height:50px;position:absolute;bottom:4px;right:770px;">
+                </lord-icon>
+                        <input class="saldoRetirar" type="number"  placeholder="Monto a retirar">
+                   
+                        <div class="botones">
+                            <button class="retirar" type="button"> Retirar</button>
+                            <button id="cancelarBotonRetirar" class="cancelar" type="button"> Cancelar</button>
+                           </div>
+            </div>
+            <div class="enviarDinero" id="enviarDineroPanel">
+                <img style="height: 50px; width: 50px;" src="./img/logo-banco-visionario.png" alt="">
+                <h1 class="saldo">Enviar Dinero</h1>
+                <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+                <lord-icon
+                    src="https://cdn.lordicon.com/scubrffn.json"
+                    trigger="loop"
+                    delay="1000"
+                    style="width:50px;height:50px;position:absolute;bottom:76px;right:770px;">
+                </lord-icon>
+                <input class="saldoRetirar" type="text"  placeholder="Enviar a :">
+                <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+                <lord-icon
+                 src="https://cdn.lordicon.com/qainaehu.json"
+                 trigger="loop"
+                 delay="1000"
+                 style="width:50px;height:50px;position:absolute;bottom:4px;right:770px;">
+                 </lord-icon>
+                
+                <input class="saldoRetirar" type="number"  placeholder="Monto a enviar">
+ 
+            <div class="botones">
+            <button class="retirar" type="button"> Enviar</button>
+            <button id="cancelarBotonEnviar" class="cancelar" type="button"> Cancelar</button>
+           </div>
+               
+
+            </div>
+            <div class="consignación" id="consignacionPanel">
+                <img style="height: 50px; width: 50px;" src="./img/logo-banco-visionario.png" alt="">
+                <h1 class="saldo">Consignacion</h1>
+                <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+                <lord-icon
+                 src="https://cdn.lordicon.com/noregfgy.json"
+                 trigger="loop"
+                 delay="1000"
+                 style="width:50px;height:50px;position:absolute;bottom:35px;right:770px;">
+                </lord-icon>
+                <input class="saldoRetirar" type="number"  placeholder="Monto consignacion">
+                <div class="botones">
+                    <button class="retirar" type="button"> Consignar</button>
+                    <button id="cancelarBotonConsignacion" class="cancelar" type="button"> Cancelar</button>
+                   </div>
+
+            </div>
+            
+
+        </div>
+       
+
+    </div>
+    <div class="contenedor-derecho" id="contenedor-derechoUno">
+     
+     <button id="enviarDinero" class="boton-banco3">Enviar Dinero<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+        <lord-icon
+            src="https://cdn.lordicon.com/ozqvdvoh.json"
+            trigger="loop"
+            colors="outline:#121331,primary :#eee966,secondary :#109173"
+            style="width:50px;height:50px ;position: relative;top: 2px;">
+        </lord-icon>
+        </lord-icon></button>
+     <button id="consignación" class="boton-banco4">consignación <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+        <lord-icon
+            src="https://cdn.lordicon.com/pimvysaa.json"
+            trigger="loop"
+            colors="outline:#121331,primary:#b26836,secondary:#ffc738"
+            style="width:50px;height:50px;position: relative;top: 2px;">
+        </lord-icon></button>
+    </div>
+</div>
 
     </main>
     
-    
+    <script src="./js/empezar.js"></script>
+    <script src="./js/validaciones.js"></script>
 </body>
 </html>

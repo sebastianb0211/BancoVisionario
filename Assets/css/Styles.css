@@ -1,6 +1,31 @@
+* {
+  font-family: "Barriecito", cursive;
+  font-family: "Cherry Bomb One", cursive;
+  font-family: "Handjet", cursive;
+  font-family: "Kanit", sans-serif;
+  font-family: "Manrope", sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Rajdhani", sans-serif;
+}
+
 body {
-  background-image: url(/Assets/img/fondoPantalla.png);
-  background-size: cover;
+  background: rgb(2, 0, 36);
+  background: radial-gradient(
+    circle,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 14%,
+    rgba(0, 212, 255, 1) 60%
+    
+  );
+  transition: ease-in-out 4s;
+}
+h1 {
+  color: white;
+}
+h3 {
+  position: relative;
+  top: 80px;
+  right: 140px;
 }
 
 header {
@@ -10,7 +35,20 @@ header {
   border-radius: 5%;
   justify-content: space-around;
   margin-bottom: 80px;
-  background-color: lightgreen;
+  display: none;
+}
+.diseño {
+  width: 100%;
+  height: 100%;
+  background-color: #cdfcf6;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: 2px solid black;
+  box-shadow: 4px 4px black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contenedor-titulo {
@@ -27,20 +65,7 @@ header {
   height: 550px;
   border-radius: 5%;
 }
-p {
-  display: flex;
-  justify-content: space-around;
-  position: relative;
-  top: 100px;
-  right: 150px;
-  color: black;
-  font-size: large;
-  background-color: white;
-  height: 25px;
-  padding: 5px;
-  border-radius: 20%;
-  cursor: pointer;
-}
+
 a {
   margin-left: 50px;
 }
@@ -50,4 +75,5 @@ a {
   position: relative;
   left: 25px;
   top: 15px;
+  border-radius: 50%;
 }
