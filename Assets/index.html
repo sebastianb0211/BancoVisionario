@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/botones.css">
     <link rel="stylesheet" href="./css/carga.css">
     <link rel="stylesheet" href="./css/pantallaPrincipal.css">
+    <link rel="icon" href="./img/logo-banco-visionario.png">
 </head>
 <body>
 
@@ -64,7 +65,7 @@
         style="width:50px;height:50px">
         </lord-icon>
         </div>
-        <span>Sebastian</span>
+        <span id="nombrePerfil"></span>
         <p class="job">Ingeniero de software</p>
         <div class="botonSalir"> <button id="salirSesion"> Salir
         </button>
@@ -89,18 +90,23 @@
                             <input class="voltear-input" name="email" placeholder="Email" type="email" required id="email">
                             <label id="errorEmail" for=""></label>
                             <input class="voltear-input" name="Contraseña" placeholder="Contraseña" type="password" required id="contraseña">
-                            <button onclick="empezar()" class="voltear-boton" type="submit">Empezar</button>
+                            <label id="errorContraseña" for=""></label>
+                            <button onclick="empezar()" class="voltear-boton" type="button">Empezar</button>
                          </form>
                       </div>
                       <div class="voltear-carta-trasera">
                          <div class="titulo">Registrarse</div>
                          <form class="voltear-formulario" action="">
-                            <input class="voltear-input" placeholder="Nombre" type="name" required>
-                            <input class="voltear-input" name="email" placeholder="Email" type="email" required>
-                            <input class="voltear-input" name="Contraseña" placeholder="Contraseña" type="password" required>
-                            <input class="voltear-input" name="saldo" placeholder="Ingresar Saldo" type="text" required>
+                            <input class="voltear-input" name="nombre" placeholder="Nombre" type="name" required id="nombreRegistro">
+                            <label id="nombreR" for=""></label>
+                            <input class="voltear-input" name="emailR" placeholder="Email" type="email" required id="emailRegistro">
+                            <label id="emailR" for=""></label>
+                            <input class="voltear-input" name="ContraseñaR" placeholder="Contraseña" type="password" required id="contraseñaRegistro">
+                            <label id="contraseñaR" for=""></label>
+                            <input class="voltear-input" name="saldo" placeholder="Ingresar Saldo" type="text" required id="saldoRegistro">
+                            <label id="saldoR" for=""></label>
 
-                            <button class="voltear-boton" type="submit">Agregar</button>
+                            <button id="botonGuardar" class="voltear-boton" type="button">Agregar</button>
                          </form>
                       </div>
                    </div>
@@ -154,7 +160,7 @@
                         delay="1000"
                         style="width:50px;height:50px;position:absolute;top:153px;left: 100px;">
                     </lord-icon>
-                <h4> Nombre: Sebastian </h4>
+                <h4> Nombre: <label id="nombreSaldo" for=""></label> </h4>
                 <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
                         <lord-icon
                             src="https://cdn.lordicon.com/lxizbtuq.json"
@@ -162,7 +168,7 @@
                             delay="1000"
                             style="width:50px;height:50px;position:absolute;top:250px;left: 100px;">
                         </lord-icon>
-                    <h4> Saldo: 2000000</h4>
+                    <h4> Saldo: <label id="salarioSaldo" for=""></label></h4>
                         <button id="cancelarBotonSaldo" class="cancelar1" type="button"> Salir</button>
             </div>
 
@@ -176,7 +182,7 @@
                         delay="1000"
                         style="width:50px;height:50px;position:absolute;bottom:75px;right:760px;">
                     </lord-icon>
-                <h4>Nombre:sebastian</h4>
+                <h4>Nombre:<label id="nombreRetirar" for=""></label></h4>
                 <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
                 <lord-icon
                     src="https://cdn.lordicon.com/osperlqv.json"
@@ -184,10 +190,11 @@
                     delay="1000"
                     style="width:50px;height:50px;position:absolute;bottom:4px;right:770px;">
                 </lord-icon>
-                        <input class="saldoRetirar" type="number"  placeholder="Monto a retirar">
+                        <input class="saldoRetirar" type="number"  placeholder="Monto a retirar" name="retirar" id="retirarPanel">
+                        <label id="retirarMalo" for=""></label>
                    
                         <div class="botones">
-                            <button class="retirar" type="button"> Retirar</button>
+                            <button class="retirar" type="button" id="retirarDineroBoton"> Retirar</button>
                             <button id="cancelarBotonRetirar" class="cancelar" type="button"> Cancelar</button>
                            </div>
             </div>
@@ -201,7 +208,7 @@
                     delay="1000"
                     style="width:50px;height:50px;position:absolute;bottom:76px;right:770px;">
                 </lord-icon>
-                <input class="saldoRetirar" type="text"  placeholder="Enviar a :">
+                <input class="saldoRetirar" type="text"  placeholder="Enviar a :" id="enviarUsuario">
                 <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
                 <lord-icon
                  src="https://cdn.lordicon.com/qainaehu.json"
@@ -210,11 +217,13 @@
                  style="width:50px;height:50px;position:absolute;bottom:4px;right:770px;">
                  </lord-icon>
                 
-                <input class="saldoRetirar" type="number"  placeholder="Monto a enviar">
+                <input class="saldoRetirar" type="number"  placeholder="Monto a enviar" name="enviar" id="enviar">
+                <label id="enviarMalo" for=""></label>
  
             <div class="botones">
-            <button class="retirar" type="button"> Enviar</button>
+            <button id="enviarDineroBoton" class="retirar" type="button"> Enviar</button>
             <button id="cancelarBotonEnviar" class="cancelar" type="button"> Cancelar</button>
+            
            </div>
                
 
@@ -229,9 +238,10 @@
                  delay="1000"
                  style="width:50px;height:50px;position:absolute;bottom:35px;right:770px;">
                 </lord-icon>
-                <input class="saldoRetirar" type="number"  placeholder="Monto consignacion">
+                <input class="saldoRetirar" type="number"  placeholder="Monto consignacion" name="consignacion" id="consignacion">
+                <label id="maloConsignacion" for=""></label>
                 <div class="botones">
-                    <button class="retirar" type="button"> Consignar</button>
+                    <button class="retirar" type="button" id="botonConsignar"> Consignar</button>
                     <button id="cancelarBotonConsignacion" class="cancelar" type="button"> Cancelar</button>
                    </div>
 
