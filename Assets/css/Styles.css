@@ -89,6 +89,7 @@ a {
   margin: auto;
   font-family: inherit;
   display: none;
+  
 }
 
 .cardHistorial button {
@@ -110,10 +111,11 @@ a {
 }
 .contenidoHistorial {
   width: 100%;
-  height: 200px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
 }
 .contenedorBoton{
   width: 100%;
