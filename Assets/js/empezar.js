@@ -1,6 +1,7 @@
-let usuario = {};
+let usuario = null;
 let usuarios = [];
 let contadorUsuarios = 0;
+let historial = [];
 
 function validarFormulario(e) {
   const nombre = /^[a-zA-ZÀ-ÿ\s']{1,40}$/;
@@ -155,6 +156,7 @@ function validarTodosCampos() {
     };
 
     usuarios.push(usuario);
+    alert("Registro exitoso :)");
     console.log("Usuario guardado:", usuario);
     console.log(usuarios);
 
@@ -168,9 +170,7 @@ inputs.forEach((input) => {
   input.addEventListener("keydown", validarFormulario);
 });
 
-document
-  .getElementById("botonGuardar")
-  .addEventListener("click", validarTodosCampos);
+document.getElementById("botonGuardar").addEventListener("click", validarTodosCampos);
 
 let intentos = 0;
 let intentosPosibles = 3;
@@ -194,7 +194,7 @@ function empezar() {
     let usuarioEncontrado = false;
     let usuario = "";
     for (let i = 0; i < usuarios.length; i++) {
-       usuario = usuarios[i];
+      usuario = usuarios[i];
 
       if (
         usuario.email === emailInicioSesion &&
@@ -205,6 +205,10 @@ function empezar() {
         document.getElementById("salarioSaldo").textContent = usuario.saldo;
         document.getElementById("nombreRetirar").textContent = usuario.nombre;
         document.getElementById("nombrePerfil").textContent = usuario.nombre;
+        var fechaActual = new Date();
+        
+        let mensajeHistorial ="el usuario "+usuario.nombre+" ingreso "+fechaActual.toLocaleString()+" correctamente";
+        historial.push(mensajeHistorial)
         break;
       }
     }
@@ -380,91 +384,125 @@ sesion.addEventListener("click", function () {
 ///
 
 function realizarTransferencia() {
-  // Obtener los valores de entrada
-  let cuentaDestino = document.getElementById("enviarUsuario").value; // Cuenta de destino
-  let monto = parseFloat(document.getElementById("enviar").value); // Monto a enviar
+  let cuentaDestino = document.getElementById("enviarUsuario").value;
+  let monto = parseFloat(document.getElementById("enviar").value);
+  let usuarioActualTr = usuarios.find(
+    (user) => user.email === document.getElementById("email").value
+  );
+  let cuentaDestinoExistente = usuarios.find(
+    (user) => user.email === cuentaDestino
+  );
 
-  let cuentaDestinoExistente = null;
-
-  for (let i = 0; i < usuarios.length; i++) {
-    if (usuarios[i].nombre === cuentaDestino) {
-      cuentaDestinoExistente = usuarios[i];
-      break;
-    }
-  }
-
-  // Asumiendo que `usuario` se refiere al usuario actual que inicia la transferencia
-  if (cuentaDestinoExistente === null) {
+  if (!cuentaDestinoExistente) {
     alert("La cuenta de destino no existe en el sistema.");
   } else if (monto <= 0) {
-    alert("El monto debe ser mayor que cero");
-  } else if (cuentaDestinoExistente === usuario) {
+    alert("El monto debe ser mayor que cero.");
+  } else if (cuentaDestinoExistente === usuarioActualTr) {
     alert("No puedes transferir dinero a tu propia cuenta.");
-  } else if (monto > usuario.saldo) {
-    // Verificar el saldo del usuario que inicia la transferencia
+  } else if (monto > usuarioActualTr.saldo) {
     alert("Saldo insuficiente para realizar esta transacción.");
+  } else if (usuarioActualTr.saldo - monto < 10000) {
+    alert("No puedes dejar menos de 10,000 en tu cuenta.");
   } else {
-    // Actualizar los saldos de las cuentas
     cuentaDestinoExistente.saldo += monto;
-    usuario.saldo -= monto;
+    usuarioActualTr.saldo -= monto;
+    document.getElementById("salarioSaldo").textContent = usuarioActualTr.saldo;
+    let fechaActual = new Date();
+        
+        let mensajeHistorial ="el usuario "+usuarioActualTr.nombre+"realizo una transferencia a "+cuentaDestinoExistente.nombre+" correctamente "+fechaActual.toLocaleString();
+        historial.push(mensajeHistorial)
 
-    // Mostrar un mensaje de éxito en el elemento con id "transferenciaExitosa"
     alert("Transferencia Exitosa");
     document.querySelectorAll("input").forEach((input) => (input.value = ""));
   }
 }
+document
+  .getElementById("enviarDineroBoton")
+  .addEventListener("click", realizarTransferencia);
 
-
-// Agregar un evento click al botón "Enviar"
-document.getElementById("enviarDineroBoton").addEventListener("click", realizarTransferencia);
-
-// Agregar un evento click al botón "Retirar"
-document.getElementById("retirarDineroBoton").addEventListener("click", function () {
-    // Obtener el monto a retirar del input
-    const montoARetirar = parseFloat(document.getElementById("retirarPanel").value);
-
-    // Encontrar el usuario actual
-    const usuarioActual = usuarios.find((u) => u.nombre === usuario.nombre);
+document
+  .getElementById("retirarDineroBoton")
+  .addEventListener("click", function () {
+    const montoARetirar = parseFloat(
+      document.getElementById("retirarPanel").value
+    );
+    const usuarioActual = usuarios.find(
+      (user) => user.email === document.getElementById("email").value
+    );
 
     if (montoARetirar <= 0) {
       alert("El monto a retirar debe ser mayor que cero.");
     } else if (montoARetirar > usuarioActual.saldo) {
       alert("Saldo insuficiente para realizar este retiro.");
+    } else if (usuarioActual.saldo - montoARetirar < 10000) {
+      alert("No puedes dejar menos de 10,000 en tu cuenta.");
     } else {
-      // Restar el monto del saldo del usuario
       usuarioActual.saldo -= montoARetirar;
-
-      // Actualizar el saldo en la interfaz (por ejemplo, cambiar el texto en algún elemento HTML)
       document.getElementById("salarioSaldo").textContent = usuarioActual.saldo;
+      let fechaActual = new Date();
+        
+        let mensajeRetirar ="el usuario "+usuarioActual.nombre+"retiro "+montoARetirar+" correctamente "+fechaActual.toLocaleString();
+        historial.push(mensajeRetirar)
 
-      // Mostrar un mensaje de éxito
       alert("Retiro exitoso: " + montoARetirar + " pesos.");
-
-      // Limpiar el campo de entrada
       document.getElementById("retirarPanel").value = "";
     }
   });
+
+//la funcion consignar dinero
 function consignarDinero() {
-  // Obtener el monto a consignar desde el input
-  const montoConsignacion = parseFloat(
+  let montoConsignacion = parseFloat(
     document.getElementById("consignacion").value
   );
-
-  // Encontrar el usuario que va a recibir la consignación
-  const usuarioDestino = usuarios.find((u) => u.nombre === usuario.nombre);
+  let usuarioDestino = usuarios.find(
+    (user) => user.email === document.getElementById("email").value
+  );
 
   if (montoConsignacion <= 0) {
     alert("El monto a consignar debe ser mayor que cero");
   } else {
-    usuarioDestino.saldo += montoConsignacion; // Sumar el monto a la cuenta del usuario destino
+    usuarioDestino.saldo += montoConsignacion;
     console.log(usuarios);
-
-    // Mostrar un mensaje de éxito en el elemento con id "consignacionExitosa"
     alert("consignacion exitosa: " + montoConsignacion + " pesos.");
-    document.getElementById("salarioSaldo").textContent = usuario.saldo;
+    let fechaActual = new Date();
+    let mensajeConsignar ="el usuario "+usuarioDestino.nombre+"consigno "+montoConsignacion+" correctamente "+fechaActual.toLocaleString();
+        historial.push(mensajeConsignar)
+    document.getElementById("salarioSaldo").textContent = usuarioDestino.saldo;
     document.querySelectorAll("input").forEach((input) => (input.value = ""));
   }
 }
-
-// Agregar un evento click al botón "Consignar"
 document.getElementById("botonConsignar").addEventListener("click", consignarDinero);
+
+function mostrarHistorial() {
+  let historialCarta = document.getElementById("historialCarta");
+  let cancelarHistorial = document.getElementById("cancelarHistorial");
+  let borrarHistorialBoton = document.getElementById("borrarHistorial");
+
+  historialCarta.style.display = "flex";
+  historialCarta.style.flexDirection = "column";
+
+  let contenidoHistorial = document.getElementById("contenidoHistorial");
+
+  contenidoHistorial.innerHTML = "";
+
+  for (let i = 0; i < historial.length; i++) {
+    let label = document.createElement("label");
+    label.textContent = historial[i];
+    contenidoHistorial.appendChild(label);
+  }
+  cancelarHistorial.addEventListener("click", function () {
+    historialCarta.style.display = "none";
+  });
+
+
+  borrarHistorialBoton.addEventListener("click", function () {
+    let contenidoHistorial = document.getElementById("contenidoHistorial");
+    contenidoHistorial.innerHTML = "";
+    historialCarta.style.display = "none";
+    
+    
+  });
+}
+
+document.getElementById("mostrarHistorialBoton").addEventListener("click", mostrarHistorial);
+

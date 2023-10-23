@@ -15,7 +15,6 @@ body {
     rgba(2, 0, 36, 1) 0%,
     rgba(9, 9, 121, 1) 14%,
     rgba(0, 212, 255, 1) 60%
-    
   );
   transition: ease-in-out 4s;
 }
@@ -76,4 +75,51 @@ a {
   left: 25px;
   top: 15px;
   border-radius: 50%;
+}
+.cardHistorial {
+  width: 350px;
+  height: 270px;
+  background-image: linear-gradient(144deg, #82ebf2, #41a7ef 60%, #0b23f8);
+  border: none;
+  border-radius: 10px;
+  padding-top: 10px;
+  position: absolute;
+  left: 180px;
+  top: 20px;
+  margin: auto;
+  font-family: inherit;
+  display: none;
+}
+
+.cardHistorial button {
+  padding: 2px 20px;
+  display: block;
+  margin: auto;
+  border-radius: 8px;
+  border: none;
+  margin-top: 20px;
+  background: #e8e8e8;
+  color: black;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.cardHistorial button:hover {
+  background: red;
+  color: #ffffff;
+}
+.contenidoHistorial {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contenedorBoton{
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+ 
 }
