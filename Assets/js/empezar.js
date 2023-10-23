@@ -409,69 +409,57 @@ function realizarTransferencia() {
     document.getElementById("salarioSaldo").textContent = usuarioActualTr.saldo;
     let fechaActual = new Date();
         
-        let mensajeHistorial ="el usuario "+usuarioActualTr.nombre+"realizo una transferencia a "+cuentaDestinoExistente.nombre+" correctamente "+fechaActual.toLocaleString();
+        let mensajeHistorial ="el usuario "+usuarioActualTr.nombre+" realizo una transferencia a "+cuentaDestinoExistente.nombre+" de "+monto+ " correctamente "+fechaActual.toLocaleString();
         historial.push(mensajeHistorial)
 
     alert("Transferencia Exitosa");
-    document.querySelectorAll("input").forEach((input) => (input.value = ""));
+     parseFloat(document.getElementById("enviar").value=0);
   }
 }
-document
-  .getElementById("enviarDineroBoton")
-  .addEventListener("click", realizarTransferencia);
+document.getElementById("enviarDineroBoton").addEventListener("click", realizarTransferencia);
+document.getElementById("retirarDineroBoton").addEventListener("click", function () {
+  const montoARetirar = parseFloat(document.getElementById("retirarPanel").value);
+  const usuarioActual = usuarios.find(user => user.email === document.getElementById("email").value);
 
-document
-  .getElementById("retirarDineroBoton")
-  .addEventListener("click", function () {
-    const montoARetirar = parseFloat(
-      document.getElementById("retirarPanel").value
-    );
-    const usuarioActual = usuarios.find(
-      (user) => user.email === document.getElementById("email").value
-    );
-
-    if (montoARetirar <= 0) {
+  if (montoARetirar <= 0) {
       alert("El monto a retirar debe ser mayor que cero.");
-    } else if (montoARetirar > usuarioActual.saldo) {
+  } else if (montoARetirar > usuarioActual.saldo) {
       alert("Saldo insuficiente para realizar este retiro.");
-    } else if (usuarioActual.saldo - montoARetirar < 10000) {
+  } else if (usuarioActual.saldo - montoARetirar < 10000) {
       alert("No puedes dejar menos de 10,000 en tu cuenta.");
-    } else {
+  } else {
       usuarioActual.saldo -= montoARetirar;
+      // Actualizar el saldo en el DOM
       document.getElementById("salarioSaldo").textContent = usuarioActual.saldo;
       let fechaActual = new Date();
-        
-        let mensajeRetirar ="el usuario "+usuarioActual.nombre+"retiro "+montoARetirar+" correctamente "+fechaActual.toLocaleString();
-        historial.push(mensajeRetirar)
-
+      let mensajeRetirar = "el usuario " + usuarioActual.nombre + " retiro " + montoARetirar + " correctamente " + fechaActual.toLocaleString();
+      historial.push(mensajeRetirar);
       alert("Retiro exitoso: " + montoARetirar + " pesos.");
       document.getElementById("retirarPanel").value = "";
-    }
-  });
+  }
+});
 
-//la funcion consignar dinero
+// Función para consignar dinero
+document.getElementById("botonConsignar").addEventListener("click", consignarDinero);
+
 function consignarDinero() {
-  let montoConsignacion = parseFloat(
-    document.getElementById("consignacion").value
-  );
-  let usuarioDestino = usuarios.find(
-    (user) => user.email === document.getElementById("email").value
-  );
+  let montoConsignacion = parseFloat(document.getElementById("consignacion").value);
+  let usuarioDestino = usuarios.find(user => user.email === document.getElementById("email").value);
 
   if (montoConsignacion <= 0) {
-    alert("El monto a consignar debe ser mayor que cero");
+      alert("El monto a consignar debe ser mayor que cero");
   } else {
-    usuarioDestino.saldo += montoConsignacion;
-    console.log(usuarios);
-    alert("consignacion exitosa: " + montoConsignacion + " pesos.");
-    let fechaActual = new Date();
-    let mensajeConsignar ="el usuario "+usuarioDestino.nombre+"consigno "+montoConsignacion+" correctamente "+fechaActual.toLocaleString();
-        historial.push(mensajeConsignar)
-    document.getElementById("salarioSaldo").textContent = usuarioDestino.saldo;
-    document.querySelectorAll("input").forEach((input) => (input.value = ""));
+      usuarioDestino.saldo += montoConsignacion;
+      // Actualizar el saldo en el DOM
+      document.getElementById("salarioSaldo").textContent = usuarioDestino.saldo;
+      let fechaActual = new Date();
+      let mensajeConsignar = "el usuario " + usuarioDestino.nombre + " consigno " + montoConsignacion + " correctamente " + fechaActual.toLocaleString();
+      historial.push(mensajeConsignar);
+      alert("Consignación exitosa: " + montoConsignacion + " pesos.");
+      document.getElementById("consignacion").value = "";
   }
 }
-document.getElementById("botonConsignar").addEventListener("click", consignarDinero);
+
 
 function mostrarHistorial() {
   let historialCarta = document.getElementById("historialCarta");
@@ -496,6 +484,7 @@ function mostrarHistorial() {
 
 
   borrarHistorialBoton.addEventListener("click", function () {
+    historial = [];
     let contenidoHistorial = document.getElementById("contenidoHistorial");
     contenidoHistorial.innerHTML = "";
     historialCarta.style.display = "none";
