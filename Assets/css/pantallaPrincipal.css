@@ -197,4 +197,13 @@ h4 {
     align-items: center;
     
   }
+  .toggle-password {
+    position: absolute;
+    right: 30px;
+    top: 330px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+}
 
