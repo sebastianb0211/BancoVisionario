@@ -170,9 +170,7 @@ inputs.forEach((input) => {
   input.addEventListener("keydown", validarFormulario);
 });
 
-document
-  .getElementById("botonGuardar")
-  .addEventListener("click", validarTodosCampos);
+document.getElementById("botonGuardar").addEventListener("click", validarTodosCampos);
 
 let intentos = 0;
 let intentosPosibles = 3;
@@ -188,9 +186,7 @@ function empezar() {
       "Has superado el límite de intentos. El formulario de acceso Esta bloqueado perdon."
     );
     document.getElementById("formulario-inicio-sesion").reset();
-    document
-      .querySelectorAll("input")
-      .forEach((input) => (input.disabled = true));
+    document.querySelectorAll("input").forEach((input) => (input.disabled = true));
     document.querySelector("button[type='button']").disabled = true;
   } else {
     let usuarioEncontrado = false;
@@ -418,14 +414,7 @@ function realizarTransferencia() {
     document.getElementById("salarioSaldo").textContent = usuarioActualTr.saldo;
     let fechaActual = new Date();
 
-    let mensajeHistorial =
-      "el usuario " +
-      usuarioActualTr.nombre +
-      " realizo una transferencia a " +
-      cuentaDestinoExistente.nombre +
-      " de " +
-      monto +
-      " correctamente " +
+    let mensajeHistorial ="el usuario " + usuarioActualTr.nombre +" realizo una transferencia a " +cuentaDestinoExistente.nombre +" de " +monto +" correctamente " +
       fechaActual.toLocaleString();
     historial.push(mensajeHistorial);
 
@@ -433,12 +422,8 @@ function realizarTransferencia() {
     parseFloat((document.getElementById("enviar").value = 0));
   }
 }
-document
-  .getElementById("enviarDineroBoton")
-  .addEventListener("click", realizarTransferencia);
-document
-  .getElementById("retirarDineroBoton")
-  .addEventListener("click", function () {
+document.getElementById("enviarDineroBoton").addEventListener("click", realizarTransferencia);
+document.getElementById("retirarDineroBoton").addEventListener("click", function () {
     const montoARetirar = parseFloat(
       document.getElementById("retirarPanel").value
     );
@@ -473,9 +458,7 @@ document
   });
 
 // Función para consignar dinero
-document
-  .getElementById("botonConsignar")
-  .addEventListener("click", consignarDinero);
+document.getElementById("botonConsignar").addEventListener("click", consignarDinero);
 
 function consignarDinero() {
   let montoConsignacion = parseFloat(
