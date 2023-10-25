@@ -1,7 +1,14 @@
+
+// Declaramos variables globales
 let usuario = null;
 let usuarios = [];
 let contadorUsuarios = 0;
 let historial = [];
+
+ /* creamos una funcion para hacer todas las validaciones de nuestros registros
+ comparando con nuestras expresiones regulares y si no son como 
+ el formato de nuestras expresiones regulares le ponemos un color correspondiente */
+
 
 function validarFormulario(e) {
   const nombre = /^[a-zA-ZÀ-ÿ\s']{1,40}$/;
@@ -120,6 +127,8 @@ function validarFormulario(e) {
       break;
   }
 }
+/* Luego creamos una funcion que nos ayuda a almacenar el valor booleano true o false
+dependiendo si es rojo o verde en nuestras validaciones de arriba */
 
 function validarTodosCampos() {
   const nombreValido = validarFormulario({
@@ -147,6 +156,12 @@ function validarTodosCampos() {
     },
   });
 
+   /* Aqui creamos una condicion para solo agregar los atributos al objeto
+   cuando esten todos los valores en los campos de color verde o true si 
+   cualquier valor no cumple el formato de las expresiones regulares 
+   siempre nos va a retornar un false y no hara nada */
+
+
   if (nombreValido && emailValido && contraseñaValida && saldoValido) {
     usuario = {
       nombre: document.getElementById("nombreRegistro").value,
@@ -154,6 +169,10 @@ function validarTodosCampos() {
       contraseña: document.getElementById("contraseñaRegistro").value,
       saldo: parseFloat(document.getElementById("saldoRegistro").value),
     };
+
+    /* Luego cuando se haya guardado el objeto con los campos validos
+    lo pusheamos al arreglo de usuarios y mostramos un mensajito y
+    colocamos todos los inputs en vacios*/
 
     usuarios.push(usuario);
     alert("Registro exitoso :)");
@@ -175,6 +194,11 @@ document.getElementById("botonGuardar").addEventListener("click", validarTodosCa
 let intentos = 0;
 let intentosPosibles = 3;
 
+
+/* En esta funcion validamos todo con los intentos fallidos y si existe algun 
+usuario en el sistema si hace mas de 3 intentos el formulario se bloqueara
+y mostrara un mensaje */
+
 function empezar() {
   const emailInicioSesion = document.getElementById("email").value;
   const contraseñaInicioSesion = document.getElementById("contraseña").value;
@@ -189,11 +213,15 @@ function empezar() {
     document.querySelectorAll("input").forEach((input) => (input.disabled = true));
     document.querySelector("button[type='button']").disabled = true;
   } else {
+
+    /* si el correo y contraseña son correctas agregare los valores correspondientes
+    a unos componentes en nuestro html */
+
     let usuarioEncontrado = false;
     let usuario = "";
     for (let i = 0; i < usuarios.length; i++) {
       usuario = usuarios[i];
-
+      
       if (
         usuario.email === emailInicioSesion &&
         usuario.contraseña === contraseñaInicioSesion
@@ -203,19 +231,19 @@ function empezar() {
         document.getElementById("salarioSaldo").textContent = usuario.saldo;
         document.getElementById("nombreRetirar").textContent = usuario.nombre;
         document.getElementById("nombrePerfil").textContent = usuario.nombre;
+
+        /* Aqui creamos una variable de fecha y creamos un mensaje para almacenar 
+        en el historial */
         var fechaActual = new Date();
 
-        let mensajeHistorial =
-          "el usuario " +
-          usuario.nombre +
-          " ingreso " +
-          fechaActual.toLocaleString() +
-          " correctamente";
+        let mensajeHistorial ="el usuario " +usuario.nombre +" ingreso " +fechaActual.toLocaleString() +" correctamente";
         historial.push(mensajeHistorial);
         break;
       }
     }
-
+      /* si el usuario se encuentra en el sistema empieza nuestro programa y oculta 
+      y desaparece ciertas secciones de nuestro codigo aparte apareciendo
+      una animacion de carga antes de salir los elementos */
     if (usuarioEncontrado) {
       let inicioSesion = document.getElementById("inicio-sesion1");
       let encabezado = document.getElementById("encabezado");
@@ -348,7 +376,8 @@ consignación.addEventListener("click", function () {
     consignaciónPanel.style.display = "none";
   });
 });
-
+ /* Aqui creamos una funcion para salir sesion cada vez que se preione el boton
+ salir ocultara todo nuestro codigo menos el inicio de sesion y registro */
 let sesion = document.getElementById("Sesion");
 let cartaSalirSesion = document.getElementById("cartaSalirSesion");
 let cancelarSesion = document.getElementById("cancelarSesion");
@@ -384,7 +413,9 @@ sesion.addEventListener("click", function () {
   });
 });
 
-///
+/*  Aqui se crea nuestra funcion para poder enviar las transferencias validando
+ciertos parametros y obteniendo nuevos valores */
+
 
 function realizarTransferencia() {
   let cuentaDestino = document.getElementById("enviarUsuario").value;
@@ -423,6 +454,8 @@ function realizarTransferencia() {
   }
 }
 document.getElementById("enviarDineroBoton").addEventListener("click", realizarTransferencia);
+
+/* Aqui creamos nuestra funcion de retirar validando campos y recibiendo valores */
 document.getElementById("retirarDineroBoton").addEventListener("click", function () {
     const montoARetirar = parseFloat(
       document.getElementById("retirarPanel").value
@@ -457,7 +490,7 @@ document.getElementById("retirarDineroBoton").addEventListener("click", function
     }
   });
 
-// Función para consignar dinero
+// Función para consignar dinero 
 document.getElementById("botonConsignar").addEventListener("click", consignarDinero);
 
 function consignarDinero() {
@@ -484,6 +517,9 @@ function consignarDinero() {
     document.getElementById("consignacion").value = "";
   }
 }
+/* Aqui creamos nuestro historial para cada vez que se oprima el boton 
+se muestre el historial con todos nuestros mensajes personalizados guardados
+en nuestro arreglo de historial */
 
 function mostrarHistorial() {
   let historialCarta = document.getElementById("historialCarta");
